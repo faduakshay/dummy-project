@@ -1,0 +1,104 @@
+<div class="vh-100 vw-100">
+  <div class="row" style="padding-top:3rem">
+    <div class="col-md-4 offset-md-4 ">
+      <div class="card text-center shadow-sm" style="width:25rem; height:30rem;">
+        <div class="card-header">
+          <img src="../assets/login-avtar.png" style="padding: 0%" class="avatar" alt="avtar"> 
+          <label style="padding-left: 1rem; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-style: italic">Todo
+            Sign Up Form 
+          </label>
+        </div>
+        <div class="invalid-text text-danger" *ngIf="passMisMatch">
+          <p> Password Mismatch Error </p>
+        </div>
+        <form (ngSubmit)="sign()" #signUpForm="ngForm" novalidate>
+          <!-- Creating  a card for Sign Up form-->
+          <div class="card-body text-center">
+            <!-- username input field -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control text-center" placeholder="First Name" 
+                    name="firstName" [(ngModel)]="model.firstName" #firstName1=ngModel required>
+                </div>
+                <div class="invalid-text text-danger">
+                  <p *ngIf="firstName1.invalid && (firstName1.dirty || firstName1.touched)"> Please Enter Name</p>
+                </div>
+              </div>
+
+              <!-- Last Name input field -->
+              <div class="col-md-6">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control text-center" name="lastName"
+                    [(ngModel)]="model.lastName" #lastName1=ngModel placeholder="Last Name" required>
+                </div>
+                <div class="invalid-text text-danger">
+                  <p *ngIf="lastName1.invalid && (lastName1.dirty || lastName1.touched)">Please Enter Last Name</p>
+                </div>
+              </div>
+            </div>
+            <!-- Password Input Field -->
+            <div class="input-group mt-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i>
+                </span>
+              </div>
+              <input type="password" class="form-control text-center" name="password"
+                [(ngModel)]="model.password" #password1=ngModel placeholder="Password" required minlength="8">
+            </div>
+            <div class="invalid-text text-danger" *ngIf="password1.errors && (password1.dirty || password1.touched)">
+              <p *ngIf="password1.errors.required">Please Enter password</p>
+              <p *ngIf="password1.errors.minlength">Password must be 8 characters long</p>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="input-group mt-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i>
+                </span>
+              </div>
+              <input type="password" class="form-control text-center" name="confirmPassword"
+                [(ngModel)]="confirmPassword" #confirmPassword1=ngModel placeholder="Confirm Password" required
+                minlength="8">
+            </div>
+            <div class="invalid-text text-danger" *ngIf="password1.errors && (password1.dirty || password1.touched)">
+              <p *ngIf="password1.errors.required">Please Enter password</p>
+              <p *ngIf="password1.errors.minlength">Password must be 8 characters long</p>
+            </div>
+
+            <!-- email input field -->
+            <div class="input-group mt-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+              </div>
+              <input type="email" class="form-control text-center" placeholder="Email" name="email"
+                [(ngModel)]="model.email" #email1=ngModel required pattern="[^ @]*@[^ @]*">
+            </div>
+
+            <div class="invalid-text text-danger" *ngIf="email1.errors && (email1.dirty || email1.touched)">
+              <!-- <p *ngIf="email1.invalid && (email1.dirty || email1.touched)"> Please Enter Email id</p> -->
+              <p *ngIf="email1.errors.required"> Please Enter Email id</p>
+              <p *ngIf="email1.errors.pattern"> Please Enter @ in the Email id</p>
+
+            </div>
+            <div class="align-items-center mt-3">
+              <button type="submit" class="btn btn-primary btn-sm"
+                (click)="authService.signUp(model.email,model.password)" [disabled]="signUpForm.invalid">
+                SignUp
+              </button>
+            </div>
+            <label style="padding-top:2rem"> <a [routerLink]="['/login']">Go Back to Login</a> </label>
+          </div>
+        </form>
+      </div>
+      <pre>{{signUpForm.value | json}}</pre>
+    </div>
+  </div>
+</div>

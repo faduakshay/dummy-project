@@ -1,0 +1,66 @@
+
+<div class="">
+  <div class="row" style="padding-top:3rem">
+    <div class="col-sm-4 offset-sm-4 ">
+      <div class="card text-center shadow-sm">
+        <div class="card-header">
+          <img src="../assets/login-avtar.png" style="padding: 0%" class="avatar" alt="avtar">
+          <label
+            style="padding-left: 1rem; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-style: italic">Todo
+            Login Portal</label>
+        </div>
+        <form #myform="ngForm" novalidate>
+          <!-- Creating  a card for Username and Password fieles -->
+          <div class="card-body text-center">
+            <!-- username input field -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="email" class="form-control text-center" placeholder="Username"
+               name="userName" [(ngModel)]="userName" #userName1=ngModel required>
+            </div>
+
+            <div class="invalid-text text-danger">
+              <p *ngIf="userName1.invalid && (userName1.dirty || userName1.touched)"> Please Enter username</p>
+            </div>
+            <!-- Password input field -->
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" for="exampleInputPassword1"><i class="fas fa-key"></i>
+                </span>
+              </div>
+              <input type="password" class="form-control text-center" id="exampleInputPassword1"
+                name="password" [(ngModel)]="password" #password1=ngModel placeholder="Password" required>
+            </div>
+            <div class="invalid-text text-danger">
+              <p *ngIf="password1.invalid && (password1.dirty || password1.touched)">Please enter password</p>
+            </div>
+            <!-- Sumit button for login -->
+            <div class="align-items-center mt-3">
+              <button type="submit" class="btn btn-primary btn-sm" [disabled]="myform.invalid"
+                (click)="authService.signIn(userName,password)">
+               Login
+              </button>
+            </div>
+            <label style="padding-top:2rem"> <a [routerLink]="['/forgotPassword']">Forgot password</a> </label>
+            <label style="padding:0rem 0rem  1rem 8rem"> <a [routerLink]="['/signup']">Sign up </a> </label>
+            <div class="formGroup">
+              <span class="or"><span class="orInner">Or</span></span>
+            </div>
+            <!-- Calling GoogleAuth Api from AuthService -->
+            <div class="formGroup">
+              <button type="button" class="btn btn-danger" (click)="authService.GoogleAuth()">
+                <i class="fab fa-google-plus"></i>
+                Log in with Google
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- <pre>{{myform.value | json}}</pre> -->
+    </div>
+    <app-dashboard userName="userName"></app-dashboard>
+  </div>
+
+</div>

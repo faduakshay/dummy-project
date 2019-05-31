@@ -1,0 +1,11 @@
+.invalid-text{
+    font: smaller;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .strikeThis {
+    text-decoration: line-through
+  }
+
+.makeBold {
+    font-weight: bold;
+}

@@ -1,0 +1,41 @@
+<div class="row" style="padding-top:3rem">
+  <div class="col-sm-4 offset-sm-4">
+    <div class="card text-center shadow-sm">
+      <div class="card-header">
+        <!-- <img src="../assets/login-avtar.png" style="padding: 0%" class="avatar" alt="avtar"> -->
+        <label
+          style="padding-left: 1rem; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-style: italic">
+          Welcome to To Do list
+        </label>
+      </div>
+      <!-- Creating  a card for Username and Password fieles -->
+      <div class="card-body">
+        <!-- To Do list input field -->
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Enter your to do here ..." required name="toDoLabel"
+            [(ngModel)]="label" #toDoLabel1=ngModel>
+          <div class="input-group-append">
+            <div class="input-group-text"><i class="fas fa-plus-square" (click)="addTask(label)"></i></div>
+          </div>
+        </div>
+        <div class="invalid-text text-danger" *ngIf="toDoLabel1.invalid && (toDoLabel1.dirty || toDoLabel1.touched)">
+          <p> Input can't be blank </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card text-center shadow-sm">
+    <div class="card-body">
+  <li class="list-group-item" *ngFor="let item of toDoArray">
+        <span class="hover-cursor" (click)="alterCheck(item.key,item.isChecked)">
+          <i class="fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"></i>
+        </span>
+        <span> {{item.task}} </span>
+        <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.key)">
+          <i class="fa fa-trash-o fa-lg"></i>
+        </span>
+      </li>
+</div>      
+</div>
+
